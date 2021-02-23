@@ -1,16 +1,22 @@
 import "regenerator-runtime/runtime";
+import { content } from "./content";
 
 let numDisplay1 = "";
 let numDisplay2 = "";
 let numDisplay3 = "";
 let currentDisplay = "100";
-let targetDisplay = "";
+let targetDisplay = currentDisplay;
 
 const counterHolder = document.getElementById("counterHolder");
-const currentHolder = document.getElementById("currentHolder");
 const targetHolder = document.getElementById("targetHolder");
+const contentHolder = document.getElementById("contentHolder");
+const navHolder = document.getElementById("navHolder");
 
-display(currentDisplay, counterHolder);
+setNav(content, navHolder);
+
+displayPageNumber(currentDisplay, counterHolder);
+displayPageNumber(targetDisplay, targetHolder);
+displayContent(currentDisplay);
 
 document.addEventListener("keypress", async function (event) {
   if (event.code.match(/^Digit[0-9]$/)) {
@@ -20,13 +26,14 @@ document.addEventListener("keypress", async function (event) {
       numDisplay1 = "";
       numDisplay2 = "";
       numDisplay3 = "";
+      // stop the page count if running - weird bug
     }
 
     if (numDisplay1 && numDisplay2 && !numDisplay3) {
       numDisplay3 = keyPress;
       targetDisplay = `${numDisplay1}${numDisplay2}${numDisplay3}`;
 
-      display(targetDisplay, targetHolder);
+      displayPageNumber(targetDisplay, targetHolder);
 
       let current = Number(currentDisplay);
       let target = Number(targetDisplay);
@@ -82,28 +89,48 @@ document.addEventListener("keypress", async function (event) {
           current = 1;
         }
 
-        display(current, counterHolder);
+        displayPageNumber(current, counterHolder);
       }
 
       if (current === target) {
-        display(`${numDisplay1}${numDisplay2}${numDisplay3}`, counterHolder);
-        display(`${numDisplay1}${numDisplay2}${numDisplay3}`, currentHolder);
+        displayPageNumber(
+          `${numDisplay1}${numDisplay2}${numDisplay3}`,
+          counterHolder
+        );
         currentDisplay = targetDisplay;
+        displayContent(currentDisplay);
       }
     }
 
     if (numDisplay1 && !numDisplay2 && !numDisplay3) {
       numDisplay2 = keyPress;
-      display(`-${numDisplay1}${numDisplay2}`, targetHolder);
+      displayPageNumber(`-${numDisplay1}${numDisplay2}`, targetHolder);
     }
 
     if (!numDisplay1 && !numDisplay2 && !numDisplay3) {
       numDisplay1 = keyPress;
-      display(`--${numDisplay1}`, targetHolder);
+      displayPageNumber(`--${numDisplay1}`, targetHolder);
     }
   }
 });
 
-function display(data: string | number, elem: HTMLElement): void {
+function displayPageNumber(data: string | number, elem: HTMLElement): void {
   elem.innerText = `${data}`;
+}
+
+function displayContent(data) {
+  const page = content.find((page) => page.id === Number(data));
+  contentHolder.innerHTML = page.body;
+}
+
+function setNav(content, navHolder) {
+  const ul = document.createElement("ul");
+
+  for (const page of Array.from(content)) {
+    const li = document.createElement("li");
+    li.innerText = `${page["title"]} ${page["id"]}`;
+    ul.appendChild(li);
+  }
+
+  navHolder.appendChild(ul);
 }
