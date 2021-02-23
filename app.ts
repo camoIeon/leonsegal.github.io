@@ -1,6 +1,8 @@
-let current, target, pageHolder, displayHolder;
+let current = ["1", "0", "0"];
+let target: string[] = [];
+const pageHolder = document.getElementById("numberHolder");
+const displayHolder = document.getElementById("displayHolder");
 
-initialiseItems();
 display(current, pageHolder);
 
 document.addEventListener("keypress", (event) => {
@@ -33,14 +35,7 @@ document.addEventListener("keypress", (event) => {
   }
 });
 
-function initialiseItems() {
-  current = ["1", "0", "0"];
-  target = [];
-  pageHolder = document.getElementById("numberHolder");
-  displayHolder = document.getElementById("displayHolder");
-}
-
-function display(data: [] | number, elem: HTMLElement): void {
+function display(data: string[] | number, elem: HTMLElement): void {
   if (Array.isArray(data)) {
     elem.innerText = data.join("");
   } else {
