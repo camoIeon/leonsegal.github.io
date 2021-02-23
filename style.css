@@ -1,0 +1,28 @@
+body {
+  min-height: 100vh;
+  font-family: Teletekst, serif;
+}
+
+.hide_cursor {
+  cursor: none !important;
+}
+
+.black_bg {
+  background: black;
+}
+
+.yellow_text {
+  color: #ff0;
+}
+
+@font-face {
+  font-family: "Teletekst";
+  src: url("Teletekst.ttf");
+}
+
+.heading {
+  background: blue;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
