@@ -39,43 +39,12 @@ document.addEventListener("keypress", async function (event) {
 
       let current = Number(currentDisplay);
       let target = Number(targetDisplay);
-      const timeIntervals = [
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        400,
-        20,
-        20,
-        50,
-        50,
-      ];
+      const timeIntervals = getRandomTimeIntervals({
+        smallCount: 100,
+        smallValue: 10,
+        largeCount: 5,
+        largeValue: 250,
+      });
 
       while (current !== target && isSearching) {
         await new Promise((resolve) =>
@@ -147,7 +116,7 @@ function setNav(content, navHolder) {
   const ul = document.createElement("ul");
   ul.classList.add("width30pc");
 
-  for (const page of Array.from(content)) {
+  for (const page of content) {
     if (Number(page["id"]) !== 501) {
       const li = document.createElement("li");
       const id = document.createElement("span");
@@ -166,4 +135,28 @@ function setNav(content, navHolder) {
   }
 
   navHolder.appendChild(ul);
+}
+
+function getRandomTimeIntervals({
+  smallCount,
+  smallValue,
+  largeCount,
+  largeValue,
+}: {
+  smallCount: number;
+  smallValue: number;
+  largeCount: number;
+  largeValue: number;
+}) {
+  const output = [];
+
+  for (const elem of [...Array(smallCount).keys()]) {
+    output.push(smallValue);
+  }
+
+  for (const elem of [...Array(largeCount).keys()]) {
+    output.push(largeValue);
+  }
+
+  return output;
 }

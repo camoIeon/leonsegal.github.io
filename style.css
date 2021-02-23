@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 
 body {
   min-height: 100vh;
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
 }
 
 ul {
@@ -15,6 +15,25 @@ footer {
   position: fixed;
   bottom: 10px;
   width: 100%;
+}
+
+.square {
+  height: 1em;
+  width: 1em;
+  color: black;
+  border-top: black 3px solid;
+  border-left: black 3px solid;
+  border-right: black 3px solid;
+  background: white;
+  padding: 5px 5px 3px;
+}
+
+.black_shadow_top {
+  text-shadow: 0 -4px black;
+}
+
+.white_shadow_surround {
+  text-shadow: -4px 0 white, 0 4px white, 4px 0 white, 0 -4px white;
 }
 
 .hide_cursor {
@@ -39,6 +58,10 @@ footer {
 
 .white_text {
   color: white;
+}
+
+.black_text {
+  color: black;
 }
 
 .flex {

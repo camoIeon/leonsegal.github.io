@@ -12,7 +12,7 @@ export const content = [
   {
     id: 300,
     title: "Contact",
-    body: `If you can find him, maybe you can hire him. Actually it's just the normal places, like twitter and github with the username leonsegal.`,
+    body: `If you can find him, maybe you can hire him. Actually it's just the normal places, like twitter and github (and linkedin) with the username leonsegal.`,
   },
   {
     id: 501,
