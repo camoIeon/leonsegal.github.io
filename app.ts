@@ -1,5 +1,8 @@
 import "regenerator-runtime/runtime";
 import { content } from "./content";
+import { setClock } from "./clock";
+
+setClock();
 
 let numDisplay1 = "";
 let numDisplay2 = "";
