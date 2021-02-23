@@ -1,4 +1,4 @@
-// import "regenerator-runtime/runtime";
+import "regenerator-runtime/runtime";
 
 let numDisplay1 = "";
 let numDisplay2 = "";
@@ -12,7 +12,7 @@ const targetHolder = document.getElementById("targetHolder");
 
 display(currentDisplay, counterHolder);
 
-document.addEventListener("keypress", function (event) {
+document.addEventListener("keypress", async function (event) {
   if (event.code.match(/^Digit[0-9]$/)) {
     const keyPress = event.code.replace("Digit", "");
 
@@ -27,17 +27,58 @@ document.addEventListener("keypress", function (event) {
       targetDisplay = `${numDisplay1}${numDisplay2}${numDisplay3}`;
 
       display(targetDisplay, targetHolder);
-      display(targetDisplay, counterHolder);
 
       let current = Number(currentDisplay);
       let target = Number(targetDisplay);
+      const timeIntervals = [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        400,
+        20,
+        20,
+        50,
+        50,
+      ];
 
       while (current !== target) {
-        // await new Promise((resolve) => setTimeout(resolve, 10));
+        await new Promise((resolve) =>
+          setTimeout(
+            resolve,
+            timeIntervals[Math.floor(Math.random() * timeIntervals.length)]
+          )
+        );
 
         current += 1;
 
-        if (current === 1000) {
+        if (current === 600) {
           current = 1;
         }
 
@@ -47,6 +88,7 @@ document.addEventListener("keypress", function (event) {
       if (current === target) {
         display(`${numDisplay1}${numDisplay2}${numDisplay3}`, counterHolder);
         display(`${numDisplay1}${numDisplay2}${numDisplay3}`, currentHolder);
+        currentDisplay = targetDisplay;
       }
     }
 
