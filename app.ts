@@ -1,4 +1,4 @@
-let current = ["1", "0", "0"];
+let current = ["9", "0", "0"];
 let target: string[] = [];
 const pageHolder = document.getElementById("numberHolder");
 const displayHolder = document.getElementById("displayHolder");
@@ -21,8 +21,12 @@ document.addEventListener("keypress", (event) => {
       target = [];
 
       const timer = setInterval(() => {
-        if (currentNumber < targetNumber) {
+        if (currentNumber !== targetNumber) {
           currentNumber += 1;
+
+          if (currentNumber === 999) {
+            currentNumber = 1;
+          }
 
           display(currentNumber, pageHolder);
         }
@@ -47,9 +51,7 @@ function display(data: string[] | number, elem: HTMLElement): void {
 }
 
 // Tests:
-// wrong num
-// num recirculate
+// type lower number when on higher:
+//   ignores 1st time then immediately changes (no counting) subsequent times// num recirculate
 // num speed variation
-// no matching page
-// too many numbers typed
-// handle trailing zeroes
+// page number doesn't exist
