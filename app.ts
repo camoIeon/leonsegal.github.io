@@ -40,11 +40,11 @@ function initialiseItems() {
   displayHolder = document.getElementById("displayHolder");
 }
 
-function display(data, elem) {
+function display(data: [] | number, elem: HTMLElement): void {
   if (Array.isArray(data)) {
     elem.innerText = data.join("");
   } else {
-    elem.innerText = data;
+    elem.innerText = `${data}`;
   }
 }
 
