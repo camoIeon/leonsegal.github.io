@@ -123,15 +123,20 @@ function displayPageNumber(data: string | number, elem: HTMLElement): void {
 }
 
 function displayContent(data) {
-  const page = content.find((page) => page.id === Number(data));
+  const page = content.find((page) => page["id"] === Number(data));
   if (page) {
     const body = document.createElement("div");
     const bodyTitle = document.createElement("h2");
-    bodyTitle.innerText = page.title;
+
+    bodyTitle.innerText = page["title"];
+    bodyTitle.classList.add("white_text");
+
     const bodyText = document.createElement("p");
-    bodyText.innerText = page.body;
+
+    bodyText.innerText = page["body"];
     body.appendChild(bodyTitle);
     body.appendChild(bodyText);
+
     contentHolder.innerHTML = body.innerHTML;
   } else {
     contentHolder.innerText = "Page not found";
@@ -140,11 +145,22 @@ function displayContent(data) {
 
 function setNav(content, navHolder) {
   const ul = document.createElement("ul");
+  ul.classList.add("width30pc");
 
   for (const page of Array.from(content)) {
     if (Number(page["id"]) !== 501) {
       const li = document.createElement("li");
-      li.innerText = `${page["title"]} ${page["id"]}`;
+      const id = document.createElement("span");
+      id.innerText = page["id"];
+      id.classList.add("white_text");
+
+      const title = document.createElement("span");
+      title.innerText = page["title"];
+
+      li.appendChild(title);
+      li.appendChild(id);
+      li.classList.add("flex");
+      li.classList.add("jc_sb");
       ul.appendChild(li);
     }
   }

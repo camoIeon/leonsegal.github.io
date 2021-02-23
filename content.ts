@@ -1,22 +1,22 @@
 export const content = [
   {
     id: 100,
-    title: "welcome",
-    body: `Is nostalgia always a good thing? Hopefully this page isn't too annoying.`,
+    title: "Welcome",
+    body: `Is nostalgia always a good thing? Let's find out! Hopefully this site isn't too annoying.`,
   },
   {
     id: 200,
-    title: "about",
+    title: "About",
     body: `A web developer with some time on his hands.`,
   },
   {
     id: 300,
-    title: "contact",
+    title: "Contact",
     body: `If you can find him, maybe you can hire him.`,
   },
   {
     id: 501,
-    title: "bonus",
+    title: "Bonus",
     body: `Easter eggs are great aren't they?`,
   },
 ];

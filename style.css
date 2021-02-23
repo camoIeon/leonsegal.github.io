@@ -21,6 +21,34 @@ ul {
   color: #ff0;
 }
 
+.blue_text {
+  color: blue;
+}
+
+.white_text {
+  color: white;
+}
+
+.flex {
+  display: flex;
+}
+
+.jc_sb {
+  justify-content: space-between;
+}
+
+.width30pc {
+  width: 30%;
+}
+
+.ml10 {
+  margin-left: 10px;
+}
+
+.mr10 {
+  margin-right: 10px;
+}
+
 @font-face {
   font-family: "Teletekst";
   src: url("Teletekst.ttf");
