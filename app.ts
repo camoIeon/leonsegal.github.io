@@ -1,57 +1,67 @@
-let current = ["9", "0", "0"];
-let target: string[] = [];
-const pageHolder = document.getElementById("numberHolder");
-const displayHolder = document.getElementById("displayHolder");
+// import "regenerator-runtime/runtime";
 
-display(current, pageHolder);
+let numDisplay1 = "";
+let numDisplay2 = "";
+let numDisplay3 = "";
+let currentDisplay = "100";
+let targetDisplay = "";
 
-document.addEventListener("keypress", (event) => {
+const counterHolder = document.getElementById("counterHolder");
+const currentHolder = document.getElementById("currentHolder");
+const targetHolder = document.getElementById("targetHolder");
+
+display(currentDisplay, counterHolder);
+
+document.addEventListener("keypress", function (event) {
   if (event.code.match(/^Digit[0-9]$/)) {
-    target.push(event.code.replace("Digit", ""));
-    display(target, pageHolder);
+    const keyPress = event.code.replace("Digit", "");
 
-    if (target.length >= 3) {
-      target = target.slice(0, 3);
-      display(current, pageHolder);
+    if (numDisplay1 && numDisplay2 && numDisplay3) {
+      numDisplay1 = "";
+      numDisplay2 = "";
+      numDisplay3 = "";
+    }
 
-      const targetNumber = Number(target.join(""));
-      let currentNumber = Number(current.join(""));
+    if (numDisplay1 && numDisplay2 && !numDisplay3) {
+      numDisplay3 = keyPress;
+      targetDisplay = `${numDisplay1}${numDisplay2}${numDisplay3}`;
 
-      current = target;
-      target = [];
+      display(targetDisplay, targetHolder);
+      display(targetDisplay, counterHolder);
 
-      const timer = setInterval(() => {
-        if (currentNumber !== targetNumber) {
-          currentNumber += 1;
+      let current = Number(currentDisplay);
+      let target = Number(targetDisplay);
 
-          if (currentNumber === 1000) {
-            currentNumber = 1;
-          }
+      while (current !== target) {
+        // await new Promise((resolve) => setTimeout(resolve, 10));
 
-          display(currentNumber, pageHolder);
+        current += 1;
+
+        if (current === 1000) {
+          current = 1;
         }
 
-        if (currentNumber === targetNumber) {
-          clearInterval(timer);
+        display(current, counterHolder);
+      }
 
-          display(current, pageHolder);
-          display(current, displayHolder);
-        }
-      }, 10);
+      if (current === target) {
+        display(`${numDisplay1}${numDisplay2}${numDisplay3}`, counterHolder);
+        display(`${numDisplay1}${numDisplay2}${numDisplay3}`, currentHolder);
+      }
+    }
+
+    if (numDisplay1 && !numDisplay2 && !numDisplay3) {
+      numDisplay2 = keyPress;
+      display(`-${numDisplay1}${numDisplay2}`, targetHolder);
+    }
+
+    if (!numDisplay1 && !numDisplay2 && !numDisplay3) {
+      numDisplay1 = keyPress;
+      display(`--${numDisplay1}`, targetHolder);
     }
   }
 });
 
-function display(data: string[] | number, elem: HTMLElement): void {
-  if (Array.isArray(data)) {
-    elem.innerText = data.join("");
-  } else {
-    elem.innerText = `${data}`;
-  }
+function display(data: string | number, elem: HTMLElement): void {
+  elem.innerText = `${data}`;
 }
-
-// Tests:
-// type lower number when on higher:
-//   ignores 1st time then immediately changes (no counting) subsequent times
-// num speed variation
-// page number doesn't exist
