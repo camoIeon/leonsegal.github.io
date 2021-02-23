@@ -24,7 +24,7 @@ document.addEventListener("keypress", (event) => {
         if (currentNumber !== targetNumber) {
           currentNumber += 1;
 
-          if (currentNumber === 999) {
+          if (currentNumber === 1000) {
             currentNumber = 1;
           }
 
@@ -52,6 +52,6 @@ function display(data: string[] | number, elem: HTMLElement): void {
 
 // Tests:
 // type lower number when on higher:
-//   ignores 1st time then immediately changes (no counting) subsequent times// num recirculate
+//   ignores 1st time then immediately changes (no counting) subsequent times
 // num speed variation
 // page number doesn't exist
