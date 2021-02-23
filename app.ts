@@ -10,11 +10,15 @@ document.addEventListener("keypress", (event) => {
     target.push(event.code.replace("Digit", ""));
     display(target, pageHolder);
 
-    if (target.length === 3) {
+    if (target.length >= 3) {
+      target = target.slice(0, 3);
       display(current, pageHolder);
 
       const targetNumber = Number(target.join(""));
       let currentNumber = Number(current.join(""));
+
+      current = target;
+      target = [];
 
       const timer = setInterval(() => {
         if (currentNumber < targetNumber) {
@@ -25,8 +29,7 @@ document.addEventListener("keypress", (event) => {
 
         if (currentNumber === targetNumber) {
           clearInterval(timer);
-          current = target;
-          target = [];
+
           display(current, pageHolder);
           display(current, displayHolder);
         }
