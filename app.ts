@@ -11,6 +11,7 @@ const counterHolder = document.getElementById("counterHolder");
 const targetHolder = document.getElementById("targetHolder");
 const contentHolder = document.getElementById("contentHolder");
 const navHolder = document.getElementById("navHolder");
+let isSearching = false;
 
 setNav(content, navHolder);
 
@@ -26,10 +27,11 @@ document.addEventListener("keypress", async function (event) {
       numDisplay1 = "";
       numDisplay2 = "";
       numDisplay3 = "";
-      // stop the page count if running - weird bug
+      isSearching = false;
     }
 
     if (numDisplay1 && numDisplay2 && !numDisplay3) {
+      isSearching = true;
       numDisplay3 = keyPress;
       targetDisplay = `${numDisplay1}${numDisplay2}${numDisplay3}`;
 
@@ -75,7 +77,7 @@ document.addEventListener("keypress", async function (event) {
         50,
       ];
 
-      while (current !== target) {
+      while (current !== target && isSearching) {
         await new Promise((resolve) =>
           setTimeout(
             resolve,
@@ -100,6 +102,8 @@ document.addEventListener("keypress", async function (event) {
         currentDisplay = targetDisplay;
         displayContent(currentDisplay);
       }
+
+      isSearching = false;
     }
 
     if (numDisplay1 && !numDisplay2 && !numDisplay3) {
