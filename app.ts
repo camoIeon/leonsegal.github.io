@@ -87,7 +87,7 @@ document.addEventListener("keypress", async function (event) {
 
         current += 1;
 
-        if (current === 600) {
+        if (current === 512) {
           current = 1;
         }
 
@@ -125,7 +125,14 @@ function displayPageNumber(data: string | number, elem: HTMLElement): void {
 function displayContent(data) {
   const page = content.find((page) => page.id === Number(data));
   if (page) {
-    contentHolder.innerHTML = page.body;
+    const body = document.createElement("div");
+    const bodyTitle = document.createElement("h2");
+    bodyTitle.innerText = page.title;
+    const bodyText = document.createElement("p");
+    bodyText.innerText = page.body;
+    body.appendChild(bodyTitle);
+    body.appendChild(bodyText);
+    contentHolder.innerHTML = body.innerHTML;
   } else {
     contentHolder.innerText = "Page not found";
   }
