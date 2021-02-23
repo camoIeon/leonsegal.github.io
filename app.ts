@@ -120,16 +120,22 @@ function displayPageNumber(data: string | number, elem: HTMLElement): void {
 
 function displayContent(data) {
   const page = content.find((page) => page.id === Number(data));
-  contentHolder.innerHTML = page.body;
+  if (page) {
+    contentHolder.innerHTML = page.body;
+  } else {
+    contentHolder.innerText = "Page not found";
+  }
 }
 
 function setNav(content, navHolder) {
   const ul = document.createElement("ul");
 
   for (const page of Array.from(content)) {
-    const li = document.createElement("li");
-    li.innerText = `${page["title"]} ${page["id"]}`;
-    ul.appendChild(li);
+    if (Number(page["id"]) !== 501) {
+      const li = document.createElement("li");
+      li.innerText = `${page["title"]} ${page["id"]}`;
+      ul.appendChild(li);
+    }
   }
 
   navHolder.appendChild(ul);

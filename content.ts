@@ -14,4 +14,9 @@ export const content = [
     title: "contact",
     body: `If you can find him, maybe you can hire him.`,
   },
+  {
+    id: 501,
+    title: "bonus",
+    body: `Easter eggs are great aren't they?`,
+  },
 ];
