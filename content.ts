@@ -7,12 +7,17 @@ export const content = [
   {
     id: 200,
     title: "About",
-    body: `I am a web developer of 4 years experience. I have worked front end, back end and everywhere in-between. Tackling logic problems in development is my favourite aspect of the job.`,
+    body: `I am a web developer with over 4 years professional experience. I have worked front end, back end and everywhere in-between. Tackling logic problems in development is my favourite aspect of the job.`,
   },
   {
     id: 300,
     title: "Contact",
     body: `If you can find him, maybe you can hire him. Actually it's just the normal places, like twitter and github (and linkedin) with the username leonsegal.`,
+  },
+  {
+    id: 400,
+    title: "Twix",
+    body: `Twix is a dual prong system with a firm base which supports flexible layers, delivered in a smooth wrapper.`,
   },
   {
     id: 501,

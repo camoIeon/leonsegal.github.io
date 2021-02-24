@@ -2,11 +2,9 @@ import "regenerator-runtime/runtime";
 import { content } from "./content";
 import { setClock } from "./clock";
 
-setClock();
+setClock().catch(console.error);
 
-let numDisplay1 = "";
-let numDisplay2 = "";
-let numDisplay3 = "";
+let numDisplays = [];
 let currentDisplay = "100";
 let targetDisplay = currentDisplay;
 
@@ -26,28 +24,28 @@ document.addEventListener("keypress", async function (event) {
   if (event.code.match(/^Digit[0-9]$/)) {
     const keyPress = event.code.replace("Digit", "");
 
-    if (numDisplay1 && numDisplay2 && numDisplay3) {
-      numDisplay1 = "";
-      numDisplay2 = "";
-      numDisplay3 = "";
+    if (numDisplays.length === 3) {
+      numDisplays = [];
       isSearching = false;
     }
 
-    if (numDisplay1 && numDisplay2 && !numDisplay3) {
+    if (numDisplays.length == 2) {
       isSearching = true;
-      numDisplay3 = keyPress;
-      targetDisplay = `${numDisplay1}${numDisplay2}${numDisplay3}`;
 
-      displayPageNumber(targetDisplay, targetHolder);
+      numDisplays.push(keyPress);
+      displayPageNumber(numDisplays, targetHolder);
+
+      targetDisplay = numDisplays.join("");
 
       let current = Number(currentDisplay);
       let target = Number(targetDisplay);
       const timeIntervals = getRandomTimeIntervals({
-        smallCount: 100,
+        smallCount: 200,
         smallValue: 10,
-        largeCount: 5,
+        largeCount: 7,
         largeValue: 250,
       });
+      timeIntervals.push(1000);
 
       while (current !== target && isSearching) {
         await new Promise((resolve) =>
@@ -67,10 +65,7 @@ document.addEventListener("keypress", async function (event) {
       }
 
       if (current === target) {
-        displayPageNumber(
-          `${numDisplay1}${numDisplay2}${numDisplay3}`,
-          counterHolder
-        );
+        displayPageNumber(numDisplays, counterHolder);
         currentDisplay = targetDisplay;
         displayContent(currentDisplay);
       }
@@ -78,24 +73,33 @@ document.addEventListener("keypress", async function (event) {
       isSearching = false;
     }
 
-    if (numDisplay1 && !numDisplay2 && !numDisplay3) {
-      numDisplay2 = keyPress;
-      displayPageNumber(`-${numDisplay1}${numDisplay2}`, targetHolder);
+    if (numDisplays.length === 1) {
+      numDisplays.push(keyPress);
+      displayPageNumber(numDisplays, targetHolder);
     }
 
-    if (!numDisplay1 && !numDisplay2 && !numDisplay3) {
-      numDisplay1 = keyPress;
-      displayPageNumber(`--${numDisplay1}`, targetHolder);
+    if (numDisplays.length === 0) {
+      numDisplays.push(keyPress);
+      displayPageNumber(numDisplays, targetHolder);
     }
   }
 });
 
-function displayPageNumber(data: string | number, elem: HTMLElement): void {
-  elem.innerText = `${data}`;
+function displayPageNumber(
+  data: string[] | number | string,
+  elem: HTMLElement
+): void {
+  if (Array.isArray(data)) {
+    const output = data.join("");
+    elem.innerText = output.padStart(3, "-");
+  } else {
+    elem.innerText = `${data}`;
+  }
 }
 
 function displayContent(data) {
   const page = content.find((page) => page["id"] === Number(data));
+
   if (page) {
     const body = document.createElement("div");
     const bodyTitle = document.createElement("h2");
@@ -123,7 +127,7 @@ function setNav(content, navHolder) {
   navContainer.classList.add("mr10");
 
   for (const page of content) {
-    if (Number(page["id"]) !== 501) {
+    if (Number(page["id"]) < 301) {
       const pageContainer = document.createElement("span");
       const id = document.createElement("span");
 
