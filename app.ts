@@ -116,28 +116,33 @@ function displayContent(data) {
 }
 
 function setNav(content, navHolder) {
-  const ul = document.createElement("ul");
-  ul.classList.add("width30pc");
+  const navContainer = document.createElement("div");
+  navContainer.classList.add("flex");
+  navContainer.classList.add("jc_sb");
+  navContainer.classList.add("ml10");
+  navContainer.classList.add("mr10");
 
   for (const page of content) {
     if (Number(page["id"]) !== 501) {
-      const li = document.createElement("li");
+      const pageContainer = document.createElement("span");
       const id = document.createElement("span");
+
       id.innerText = page["id"];
       id.classList.add("white_text");
 
       const title = document.createElement("span");
-      title.innerText = page["title"];
 
-      li.appendChild(title);
-      li.appendChild(id);
-      li.classList.add("flex");
-      li.classList.add("jc_sb");
-      ul.appendChild(li);
+      title.innerText = page["title"];
+      title.classList.add("mr10");
+
+      pageContainer.appendChild(title);
+      pageContainer.appendChild(id);
+
+      navContainer.appendChild(pageContainer);
     }
   }
 
-  navHolder.appendChild(ul);
+  navHolder.appendChild(navContainer);
 }
 
 function getRandomTimeIntervals({
