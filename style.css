@@ -8,6 +8,10 @@
   font-family: "Press Start 2P", cursive;
 }
 
+.large_text {
+  font-size: 150%;
+}
+
 .fixed_bottom_10 {
   position: fixed;
   bottom: 10px;
