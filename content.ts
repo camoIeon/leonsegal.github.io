@@ -2,7 +2,7 @@ export const content = [
   {
     id: 100,
     title: "Welcome",
-    body: `Is nostalgia always a good thing? Let's find out! This is roughly how I remember ceefax/teletext. Just type in the number of the page you want to visit and marvel at how things used to be. Sort of.`,
+    body: `Is nostalgia always a good thing? Let's find out! This site is very roughly based on ceefax/teletext. Just type in the number of the page you want to visit and marvel at how things used to be. Sort of.`,
   },
   {
     id: 200,
