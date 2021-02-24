@@ -22,17 +22,17 @@ displayContent(currentDisplay);
 
 document.addEventListener("keypress", async function (event) {
   if (event.code.match(/^Digit[0-9]$/)) {
-    const keyPress = event.code.replace("Digit", "");
-
     if (numDisplays.length === 3) {
       numDisplays = [];
       isSearching = false;
     }
 
-    if (numDisplays.length == 2) {
+    const keyPress = event.code.replace("Digit", "");
+    numDisplays.push(keyPress);
+
+    if (numDisplays.length == 3) {
       isSearching = true;
 
-      numDisplays.push(keyPress);
       displayPageNumber(numDisplays, targetHolder);
 
       targetDisplay = numDisplays.join("");
@@ -73,13 +73,7 @@ document.addEventListener("keypress", async function (event) {
       isSearching = false;
     }
 
-    if (numDisplays.length === 1) {
-      numDisplays.push(keyPress);
-      displayPageNumber(numDisplays, targetHolder);
-    }
-
-    if (numDisplays.length === 0) {
-      numDisplays.push(keyPress);
+    if (numDisplays.length < 3) {
       displayPageNumber(numDisplays, targetHolder);
     }
   }
