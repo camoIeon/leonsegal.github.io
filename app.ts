@@ -16,8 +16,8 @@ let isSearching = false;
 
 setNav(content, navHolder);
 
-displayPageNumber(currentDisplay, counterHolder);
-displayPageNumber(targetDisplay, targetHolder);
+displayCounterNumber(currentDisplay);
+displayTargetNumber(targetDisplay);
 displayContent(currentDisplay);
 
 document.addEventListener("keypress", async function (event) {
@@ -33,7 +33,7 @@ document.addEventListener("keypress", async function (event) {
     if (numDisplays.length == 3) {
       isSearching = true;
 
-      displayPageNumber(numDisplays, targetHolder);
+      displayTargetNumber(numDisplays);
 
       targetDisplay = numDisplays.join("");
 
@@ -61,38 +61,41 @@ document.addEventListener("keypress", async function (event) {
           current = 1;
         }
 
-        displayPageNumber(current, counterHolder);
+        displayCounterNumber(current);
       }
 
-      if (current === target) {
-        displayPageNumber(numDisplays, counterHolder);
-        currentDisplay = targetDisplay;
-        displayContent(currentDisplay);
-      }
+      displayCounterNumber(numDisplays);
+      currentDisplay = targetDisplay;
+      displayContent(currentDisplay);
 
       isSearching = false;
     }
 
     if (numDisplays.length < 3) {
-      displayPageNumber(numDisplays, targetHolder);
+      displayTargetNumber(numDisplays);
     }
   }
 });
 
-function displayPageNumber(
-  data: string[] | number | string,
-  elem: HTMLElement
-): void {
+function displayCounterNumber(data: string[] | number | string): void {
+  displayNumber(data, counterHolder);
+}
+
+function displayTargetNumber(data: string[] | string): void {
+  displayNumber(data, targetHolder);
+}
+
+function displayNumber(data: string[] | number | string, elem: HTMLElement) {
   if (Array.isArray(data)) {
     const output = data.join("");
     elem.innerText = output.padStart(3, "-");
   } else {
-    elem.innerText = `${data}`;
+    elem.innerText = `${data}`.padStart(3, "0");
   }
 }
 
-function displayContent(data) {
-  const page = content.find((page) => page["id"] === Number(data));
+function displayContent(id) {
+  const page = content.find((page) => page["id"] === Number(id));
 
   if (page) {
     const body = document.createElement("div");
