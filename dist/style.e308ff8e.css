@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+.full_height {
+  min-height: 100vh;
+}
+
+.font_2p {
+  font-family: "Press Start 2P", cursive;
+}
+
+.fixed_bottom_10 {
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+}
+
+.dashed_blue {
+  border: 0;
+  border-top: 3px dashed blue;
+}
+
+.white_text {
+  color: white;
+}
+
+.para_text {
+  line-height: 1.6;
+}
+
+.square_char {
+  height: 1em;
+  width: 1em;
+  color: black;
+  border-top: black 3px solid;
+  border-left: black 3px solid;
+  border-right: black 3px solid;
+  background: white;
+  padding: 5px 5px 3px;
+}
+
+.black_shadow_top {
+  text-shadow: 0 -4px black;
+}
+
+.hide_cursor {
+  cursor: none !important;
+}
+
+.black_bg {
+  background: black;
+}
+
+.blue_bg {
+  background: blue;
+}
+
+.yellow_text {
+  color: #ff0;
+}
+
+.flex {
+  display: flex;
+}
+
+.jc_sb {
+  justify-content: space-between;
+}
+
+.jc_c {
+  justify-content: center;
+}
+
+.ml10 {
+  margin-left: 10px;
+}
+
+.mr10 {
+  margin-right: 10px;
+}
+
+.pd10 {
+  padding: 10px;
+}
+
+
+/*# sourceMappingURL=/style.e308ff8e.css.map */
