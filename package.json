@@ -1,10 +1,14 @@
 {
   "devDependencies": {
-    "typescript": "^4.1.5",
-    "node-forge": ">=0.10.0"
+    "cssnano": "^4.1.10",
+    "node-forge": ">=0.10.0",
+    "typescript": "^4.1.5"
   },
   "scripts": {
     "dev": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --out-dir docs"
+  },
+  "dependencies": {
+    "regenerator-runtime": "^0.13.7"
   }
 }
